@@ -91,10 +91,10 @@ func TestRemoveUser(t *testing.T) {
 	if err != nil {
 		t.Fatalf("expected err = nil, got %v\n", err)
 	}
-	/*_, err = GetUserByEmail(myUser.Email)
+	_, err = GetUserByEmail(myUser.Email)
 	if err == nil {
 		t.Fatal("expected err != nil - got nil") //erro nesse!!!
-	}*/
+	}
 }
 
 func TestRemoveUserDoesNotExist(t *testing.T) {
