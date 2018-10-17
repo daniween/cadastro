@@ -8,22 +8,20 @@ import (
 
 func main() {
 
-	AddUser(User{Name: "manuela", Email: "manu@gmail.com"})
-	AddUser(User{Name: "joe", Email: "joe@gmail.com"})
-	AddUser(User{Name: "stephanie", Email: "stephanie@gmail.com"})
-
 	e := echo.New()
-	e.GET("/", func(c echo.Context) error { //curl localhost:1323/ --> lista todos os usuarios
-		list, _ := ListUsers()
-		return c.JSON(http.StatusOK, list)
-	})
 
+	e.GET("/", getAllUsers)
 	e.GET("/:email", getUser)             // curl localhost:1323/manu@gmail.com --> mostra o usuario manuela, manu@gmail.com
 	e.PUT("/users/:email", updateUser)    // curl -X PUT -F "name=JOE" localhost:1323/users/joe@gmail.com
 	e.POST("/save", save)                 // curl -F "name=Joe Smith" -F "email=joe@labstack.com" http://localhost:1323/save
 	e.DELETE("/users/:email", deleteUser) // curl -X DELETE localhost:1323/users/manu@gmail.com
 
-	e.Logger.Fatal(e.Start(":1323"))
+	e.Logger.Fatal(e.Start(":8000"))
+}
+
+func getAllUsers(c echo.Context) error { //curl localhost:1323/ --> lista todos os usuarios
+	list, _ := ListUsers()
+	return c.JSON(http.StatusOK, list)
 }
 
 func getUser(c echo.Context) error {
