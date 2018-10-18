@@ -1,5 +1,6 @@
 package main
 
+//User usuarios
 type User struct {
 	Name  string
 	Email string
@@ -7,6 +8,8 @@ type User struct {
 
 //Users usuarios
 var Users = []User{}
+
+//UserDB mongo
 var UserDB *UsersMONGO
 
 func init() {

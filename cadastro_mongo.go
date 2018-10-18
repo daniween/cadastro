@@ -7,6 +7,7 @@ import (
 	"gopkg.in/mgo.v2/bson"
 )
 
+//UsersMONGO serve and database
 type UsersMONGO struct {
 	Server   string
 	Database string
@@ -15,9 +16,11 @@ type UsersMONGO struct {
 var db *mgo.Database
 
 const (
+	//COLLECTION nome da collection do mongo
 	COLLECTION = "users"
 )
 
+//Connect para conectar com o servidor
 func (u *UsersMONGO) Connect() {
 	session, err := mgo.Dial(u.Server)
 	if err != nil {
@@ -34,7 +37,7 @@ func (u *UsersMONGO) getAllUsers() ([]User, error) {
 
 func (u *UsersMONGO) getUser(email string) (User, error) {
 	var user User
-	err := db.C(COLLECTION).FindId(bson.ObjectIdHex(email)).One(&user)
+	err := db.C(COLLECTION).Find(bson.M{"email": email}).One(&user)
 	return user, err
 }
 
@@ -49,6 +52,6 @@ func (u *UsersMONGO) deleteUser(user User) error {
 }
 
 func (u *UsersMONGO) updateUser(user User, name string) error {
-	err := db.C(COLLECTION).UpdateId(user.Email, &user)
+	err := db.C(COLLECTION).Update(bson.M{"email": user.Email}, &user)
 	return err
 }
