@@ -40,8 +40,6 @@ func RemoveUser(user User) error {
 
 //UpdateUserName atualiza o nome
 func UpdateUserName(user User, name string) error {
-	user = User{name, user.Email} //ainda n coloquei no git!!!!
-	//findUser, _ := GetUserByEmail(user.Email)
-	//newUser := User{name, findUser.Email}
+	user = User{name, user.Email}
 	return UserDB.updateUser(user, name)
 }
