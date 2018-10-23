@@ -5,13 +5,18 @@ import (
 )
 
 func setup() {
-	Users = []User{
-		User{Name: "myself", Email: "me@example.com"},
-	}
+
+	UserDB = &UsersMONGO{}
+	UserDB.Connect()
+
+	UserDB.save(User{Name: "myself", Email: "me@example.com"})
 }
 
 func teardown() {
-	Users = []User{}
+	UserDB = &UsersMONGO{}
+	UserDB.Connect()
+
+	UserDB.deleteAll()
 }
 
 func TestListUsers(t *testing.T) {

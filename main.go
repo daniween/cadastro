@@ -1,5 +1,7 @@
 package main
 
+import "fmt"
+
 //User usuarios
 type User struct {
 	Name  string
@@ -30,6 +32,10 @@ func GetUserByEmail(email string) (User, error) {
 
 //AddUser adiciona usuarios
 func AddUser(user User) error {
+	_, err := GetUserByEmail(user.Email)
+	if err == nil { // se o erro for igual nil, entao ele encontrou um usuario. Entao nao deixa adicionar
+		return fmt.Errorf("User already exists")
+	}
 	return UserDB.save(user)
 }
 

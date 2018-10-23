@@ -55,3 +55,8 @@ func (u *UsersMONGO) updateUser(user User, name string) error {
 	err := db.C(COLLECTION).Update(bson.M{"email": user.Email}, &user)
 	return err
 }
+
+func (u *UsersMONGO) deleteAll() error { // para os testes
+	_, err := db.C(COLLECTION).RemoveAll(nil)
+	return err
+}

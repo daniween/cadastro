@@ -38,7 +38,7 @@ func save(c echo.Context) error {
 	email := c.FormValue("email")
 	err := AddUser(User{Name: name, Email: email})
 	if err != nil {
-		return c.String(http.StatusNotFound, "Not found")
+		return c.String(http.StatusNotFound, "User already exists\n")
 	}
 	return c.JSON(http.StatusCreated, "name:"+name+", email:"+email)
 }
