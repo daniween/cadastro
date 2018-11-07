@@ -16,7 +16,7 @@ func main() {
 	e.POST("/save", save)                 // curl -F "name=Joe Smith" -F "email=joe@labstack.com" http://localhost:1323/save
 	e.DELETE("/users/:email", deleteUser) // curl -X DELETE localhost:1323/users/manu@gmail.com
 
-	e.Logger.Fatal(e.Start(":8000"))
+	e.Logger.Fatal(e.Start(":8888"))
 }
 
 func getAllUsers(c echo.Context) error { //curl localhost:1323/ --> lista todos os usuarios
