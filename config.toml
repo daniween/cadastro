@@ -1,2 +1,2 @@
-server="localhost"
+server="mongo"
 database="users_db"
