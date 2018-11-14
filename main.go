@@ -2,9 +2,9 @@ package main
 
 import (
 	"fmt"
+	"os"
 
 	"github.com/labstack/echo"
-	"github.com/mlabouardy/movies-restapi/config"
 )
 
 //User usuarios
@@ -19,16 +19,10 @@ var Users = []User{}
 //UserDB mongo
 var UserDB *UsersMONGO
 
-func main() { //passo 1: ler o config: criar um obj do tipo config e chamar o config.read
-	//passo 2: pegar o obj config e usar ele pra setar o obj de conexao com o banco (db ?)
-	//passo 3: chamar o connect do obj do banco
-
-	c := config.Config{} // passo 1
-	c.Read()
+func main() {
 
 	UserDB = &UsersMONGO{
-		Database: c.Database,
-		Server:   c.Server,
+		Server: os.Getenv("DBAAS_MONGODB_ENDPOINT"),
 	}
 	UserDB.Connect()
 
